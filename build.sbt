@@ -1,4 +1,4 @@
-name := """final-project-starter"""
+name := """Recycle-and-Repair"""
 
 version := "1.0-SNAPSHOT"
 
