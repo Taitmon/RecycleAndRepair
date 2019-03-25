@@ -3,12 +3,16 @@
 # ~~~~
 
 # An example controller showing a sample home page
+
+GET     /customer                   controllers.CustomerController.get
+POST    /customer                   controllers.CustomerController.postTest
+GET     /employee                   controllers.EmployeeController.getTest
+POST    /employee                   controllers.EmployeeController.postTest
+
 GET     /                           controllers.TestController.getTest
 POST    /                           controllers.TestController.postTest
-
 GET     /test                       controllers.TestController.getTest
 POST    /test                       controllers.TestController.postTest
-
 GET     /testdb                       controllers.TestController.getTestDb
 POST    /testdb                       controllers.TestController.postTestDb
 
