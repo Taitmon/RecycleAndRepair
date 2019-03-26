@@ -1,0 +1,3 @@
+DELETE FROM Employee;
+DELETE FROM Customer;
+DELETE FROM Item;

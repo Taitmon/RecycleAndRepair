@@ -4,10 +4,15 @@
 
 # An example controller showing a sample home page
 
-GET     /customer                   controllers.CustomerController.get
-POST    /customer                   controllers.CustomerController.postTest
-GET     /employee                   controllers.EmployeeController.getTest
-POST    /employee                   controllers.EmployeeController.postTest
+GET     /home                       controllers.HomeController.getHome
+
+GET     /customer                   controllers.CustomerController.getCustomer
+POST    /customer                   controllers.CustomerController.postCustomer
+GET     /employee                   controllers.EmployeeController.getEmployee
+POST    /employee                   controllers.EmployeeController.postEmployee
+
+GET     /login                      controllers.SessionController.getLogin
+POST    /login                      controllers.SessionController.postLogin
 
 GET     /                           controllers.TestController.getTest
 POST    /                           controllers.TestController.postTest
