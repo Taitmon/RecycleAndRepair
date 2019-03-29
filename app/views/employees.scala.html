@@ -1,0 +1,30 @@
+@(employees : List[Employee])
+@doctype.render
+@header.render
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <div class="container">
+    <body>
+        @employees.size Employees
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+            </tr>
+            @for(employee <- employees){
+            <tr>
+                <td>@employee.getFirstName</td>
+                <td>@employee.getLastName</td>
+                <td>@employee.getPhoneNumber</td>
+                <td>@employee.getEmail</td>
+            </tr>
+            }
+        </table>
+    </body>
+    </div>
+</html>

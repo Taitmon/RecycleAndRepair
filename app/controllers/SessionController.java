@@ -35,7 +35,7 @@ public class SessionController extends Controller
         DynamicForm form = formFactory.form().bindFromRequest();
         String username = form.get("username");
                                     //TODO change to email
-        String sql = "SELECT e FROM Employee e WHERE EmployeeName = :username";
+        String sql = "SELECT e FROM Employee e WHERE email = :username";
 
         TypedQuery<Employee> query = db.em().createQuery(sql, Employee.class);
         query.setParameter("username", username);

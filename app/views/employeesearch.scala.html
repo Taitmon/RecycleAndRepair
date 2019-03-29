@@ -1,0 +1,53 @@
+@(employees : List[EmployeeDetail])
+@doctype.render
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>Employees</title>
+        <link rel = "stylesheet" href = "/assets/lib/bootstrap/css/bootstrap.min.css">
+        <script src = "/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body class = "bg-secondary">
+        ​
+        <nav class="navbar navbar-expand-lg text-light bg-dark mb-4">
+            <a class="navbar-brand text-white" href="/">Navigation</a>
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                ​
+                <!-- Search form -->
+                <form class="form-inline ml-auto">
+                    <div class="md-form my-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Employee Name" aria-label="Search" name = "name">
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
+                    </div>
+                </form>
+                <a href = "/login">
+                <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2">Logout</button>
+                </a>
+            </div>
+        </nav>
+        ​
+        <div class = "container">
+            <h1 class = "text-light display-1 text-center">Employees</h1>
+            <table class = "table table-hover table-dark table-striped table-bordered">
+                <tr>
+                    <th class = "bg-danger">Last Name</th>
+                    <th class = "bg-danger">First Name</th>
+                    <th class = "bg-danger">Phone Number</th>
+                    <th class = "bg-danger">Email</th>
+                    <th class = "bg-danger">Edit Information</th>
+                </tr>
+                @for(employee<-employees){
+                <tr>
+                    <td>@employee.getLastName</td>
+                    <td>@employee.getFirstName</td>
+                    <td>@employee.getPhoneNumber</td>
+                    <td>@employee.getEmail</td>
+                    <td class = "text-center">
+                        <a href = "/employeeedit/@employee.getEmployeeId" class = "btn btn-outline-danger btn-block">Edit</a></td>
+                </tr>
+                }
+            </table>
+        </div>
+    </body>
+</html>

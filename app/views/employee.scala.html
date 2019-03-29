@@ -1,17 +1,45 @@
-@(testText : String)
+@(employee : Employee)
 @doctype.render
+@header.render
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Test</title>
+        <title>@employee.getFirstName @employee.getLastName</title>
+        <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+        <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <h1>Test Page</h1>
-        <p>@testText</p>
-        <form method="post">
-            @helper.CSRF.formField
-            <input type="text" name="test" id="test">
-            <input type="submit" value="Post">
-        </form>
+        <div class="container">
+            <div class="page-header">
+                <h1>Employee Information</h1>
+            </div>
+            <div class="row">
+                <div class="col-9">
+                    <div class="row mb-2">
+                        <div class="col-4">
+                            <label class="badge badge-info">First Name</label>
+                            @employee.getFirstName
+                        </div>
+                        <div class="col-4">
+                            <label class="badge badge-info">Phone Number</label>
+                            @employee.getPhoneNumber
+                        </div>
+                        <div class="col-4">
+                            <label class="badge badge-info">Email</label>
+                            @employee.getEmail
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="badge badge-info">Last Name</label>
+                            @employee.getLastName
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <img src="/employeepicture/@employee.getEmployeeId">
+                </div>
+            </div>
+        </div>
     </body>
 </html>
