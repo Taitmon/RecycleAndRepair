@@ -1,19 +1,22 @@
 package controllers;
 
-import models.EmployeeDetail;
-import models.ItemDetail;
+import com.google.common.io.Files;
+import models.*;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 
 import javax.inject.Inject;
 import javax.persistence.TypedQuery;
+import java.io.File;
+import java.math.BigDecimal;
 import java.util.List;
 
-public class ItemController extends Controller
+public class ItemController extends BaseController
 {
     private JPAApi db;
 
@@ -24,6 +27,60 @@ public class ItemController extends Controller
     {
         this.db = db;
         this.formFactory = formFactory;
+    }
+
+    @Transactional(readOnly = true)
+    public Result getItemEdit(int itemId)
+    {
+        TypedQuery<Item> query = db.em().createQuery("SELECT i FROM Item i WHERE itemId = :itemId", Item.class);
+        query.setParameter("itemId", itemId);
+        Item item = query.getSingleResult();
+
+        return ok(views.html.itemedit.render(item));
+    }
+
+
+    @Transactional
+    public Result postItemEdit(int itemId)
+    {
+        TypedQuery<Item> query = db.em().createQuery("SELECT i FROM Item i WHERE itemId = :itemId", Item.class);
+        query.setParameter("itemId", itemId);
+        Item item = query.getSingleResult();
+
+        DynamicForm form = formFactory.form().bindFromRequest();
+        String itemName = form.get("itemName");
+        int categoryId = Integer.parseInt(form.get("categoryId"));
+        BigDecimal retailPrice = new BigDecimal("retailPrice");
+        BigDecimal unitPrice = new BigDecimal(form.get("unitPrice"));
+
+        //edit attributes
+        item.setItemName(itemName);
+        item.setCategoryId(categoryId);
+        item.setRetailPrice(retailPrice);
+        item.setUnitPrice(unitPrice);
+        db.em().persist(item);
+
+        //Picture
+        Http.MultipartFormData<File> formData = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart<File> filePart = formData.getFile("picture");
+        File file = filePart.getFile();
+
+        byte[] picture;
+
+        try
+        {
+            picture = Files.toByteArray(file);
+
+            if (picture != null && picture.length > 0)
+            {
+                item.setPicture(picture);
+            }
+        } catch (Exception e)
+        {
+            picture = null;
+        }
+
+        return ok("saved");
     }
 
     @Transactional(readOnly=true)
@@ -72,8 +129,6 @@ public class ItemController extends Controller
         }
 
 
-
-
         String name = form.get("name");
 
         if (name == null)
@@ -95,6 +150,45 @@ public class ItemController extends Controller
 
         return ok(views.html.itemsearch.render(itemsearch));
     }
+
+    @Transactional
+    public Result getItemAdd()
+    {
+
+
+        TypedQuery<Category> categoryQuery = db.em().createQuery("SELECT c FROM Category c ORDER BY categoryName", Category.class);
+        List<Category> categories = categoryQuery.getResultList();
+
+        return ok(views.html.itemadd.render(categories));
+    }
+
+    @Transactional
+    public Result postItemAdd()
+    {
+
+        Item item = new Item();
+
+        DynamicForm form = formFactory.form().bindFromRequest();
+
+
+        String itemName = form.get("itemName");
+        int categoryId = Integer.parseInt(form.get("categoryId"));
+        BigDecimal retailPrice = new BigDecimal("retailPrice");
+        BigDecimal unitPrice = new BigDecimal(form.get("unitPrice"));
+
+
+
+        item.setItemName(itemName);
+        item.setCategoryId(categoryId);
+        item.setRetailPrice(retailPrice);
+        item.setUnitPrice(unitPrice);
+        db.em().persist(item);
+
+        db.em().persist(item);
+
+        return ok("saved");
+    }
+
 }
 
 //

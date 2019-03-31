@@ -5,14 +5,14 @@ import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
 import play.db.jpa.Transactional;
-import play.mvc.Controller;
 import play.mvc.Result;
+
 
 import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class SessionController extends Controller
+public class SessionController extends BaseController
 {
     private FormFactory formFactory;
     private JPAApi db;
@@ -26,7 +26,13 @@ public class SessionController extends Controller
 
     public Result getLogin()
     {
-        return ok(views.html.login.render());
+        return ok(views.html.login.render(""));
+    }
+
+    public Result postLogout()
+    {
+        logout();
+        return redirect("/login");
     }
 
     @Transactional(readOnly = true)
@@ -42,17 +48,20 @@ public class SessionController extends Controller
 
         List<Employee> employees = query.getResultList();
 
-        String message;
+
         Result result;
 
         if (employees.size() == 1)
         {
-            result =redirect("/home");
+            Employee employee = employees.get(0);
+            result = redirect("/home");
+            login(employee);
         }
         else
         {
-            message = "Incorrect username or password. Please try again.";
-            result = ok(views.html.login.render());
+            logout();
+            String message = "Incorrect username or password. Please try again.";
+            result = ok(views.html.login.render(message));
         }
 
         return result;

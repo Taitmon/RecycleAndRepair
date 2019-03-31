@@ -10,7 +10,7 @@
     <body class = "bg-secondary">
         ​
         <nav class="navbar navbar-expand-lg text-light bg-dark mb-4">
-            <a class="navbar-brand text-white" href="/">Navigation</a>
+            <a class="navbar-brand text-white" href="/home">Home</a>
             <!-- Collapsible content -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 ​
@@ -21,9 +21,12 @@
                         <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
                     </div>
                 </form>
-                <a href = "/login">
-                <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2">Logout</button>
-                </a>
+                <form method="post" action="/logout">
+                    <a href="/login">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Logout">Logout</button>
+                    </a>
+                </form>
             </div>
         </nav>
         ​

@@ -6,6 +6,7 @@ import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
 import play.db.jpa.Transactional;
+import play.mvc.Controller;
 import play.mvc.Result;
 
 import javax.inject.Inject;
@@ -16,7 +17,7 @@ import java.util.List;
 import static play.mvc.Results.ok;
 import static play.mvc.Results.redirect;
 
-public class CustomerController
+public class CustomerController extends BaseController
 {
     private FormFactory formFactory;
     private JPAApi db;
@@ -28,30 +29,26 @@ public class CustomerController
         this.db = db;
     }
 
-    public Result getCustomer()
-    {
-        return ok(views.html.customer.render("Test Text"));
-    }
 
-    public Result postCustomer()
-    {
-        DynamicForm form = formFactory.form().bindFromRequest();
-        String test = form.get("test");
-        return ok(views.html.customer.render(test));
-    }
+
 
     @Transactional(readOnly = true)
-    public Result getCustomerDb()
+    public Result getCustomer()
     {
-        String sql = "SELECT t FROM Test t";
-        TypedQuery query = db.em().createQuery(sql, Customer.class);
-        List<Customer> customers = query.getResultList();
+        Result result = redirect("/login");
+        if (isLoggedIn())
+        {
+            String sql = "SELECT t FROM Test t";
+            TypedQuery query = db.em().createQuery(sql, Customer.class);
+            List<Customer> customers = query.getResultList();
 
-        return ok(views.html.test.render("Rows: " + customers.size()));
+            result = ok(views.html.test.render("Rows: " + customers.size()));
+        }
+        return  result;
     }
 
     @Transactional
-    public Result postCustomerDb()
+    public Result postCustomer()
     {
         DynamicForm form = formFactory.form().bindFromRequest();
         String CustomerName = form.get("test");

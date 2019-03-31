@@ -17,10 +17,16 @@ POST    /employeeedit/:id           controllers.EmployeeController.postEmployeeE
 GET     /employees                  controllers.EmployeeController.getEmployees
 GET     /employeesearch             controllers.EmployeeController.getEmployeeSearch
 
+GET     /itemadd                    controllers.ItemController.getItemAdd
+POST    /itemadd                    controllers.ItemController.postItemAdd
+GET     /itemedit/:id               controllers.ItemController.getItemEdit(id:Integer)
+POST    /itemedit/:id               controllers.ItemController.postItemEdit(id:Integer)
 GET     /itemsearch                 controllers.ItemController.getItemSearch
+
 
 GET     /login                      controllers.SessionController.getLogin
 POST    /login                      controllers.SessionController.postLogin
+POST    /logout                     controllers.SessionController.postLogout
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

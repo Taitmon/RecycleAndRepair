@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-public class EmployeeController extends Controller
+public class EmployeeController extends BaseController
 {
     private JPAApi db;
 
@@ -38,8 +38,6 @@ public class EmployeeController extends Controller
         TypedQuery<Employee> query = db.em().createQuery("SELECT e FROM Employee e WHERE employeeId = :employeeId", Employee.class);
         query.setParameter("employeeId", employeeId);
         Employee employee = query.getSingleResult();
-
-
 
 
         return ok(views.html.employee.render(employee));
@@ -101,8 +99,7 @@ public class EmployeeController extends Controller
             {
                 employee.setPicture(picture);
             }
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             picture = null;
         }
@@ -140,18 +137,24 @@ public class EmployeeController extends Controller
         return ok("saved");
     }
 
-    @Transactional (readOnly = true)
+    @Transactional(readOnly = true)
     public Result getEmployees()
     {
-        TypedQuery<Employee> query = db.em().createQuery("SELECT e FROM Employee e ORDER BY lastName, firstName, employeeId", Employee.class);
-        List <Employee> employees = query.getResultList();
+        Result result = redirect("/login");
+        if (isLoggedIn())
+        {
 
 
+            TypedQuery<Employee> query = db.em().createQuery("SELECT e FROM Employee e ORDER BY lastName, firstName, employeeId", Employee.class);
+            List<Employee> employees = query.getResultList();
 
-        return ok(views.html.employees.render(employees));
+
+            result =  ok(views.html.employees.render(employees));
+        }
+        return result;
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public Result getEmployeeSearch()
     {
         DynamicForm form = formFactory.form().bindFromRequest();

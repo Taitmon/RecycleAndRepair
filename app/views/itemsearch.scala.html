@@ -22,9 +22,12 @@
                         <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
                     </div>
                 </form>
+                <form method="post" action="/logout">
                 <a href="/login">
-                    <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2">Logout</button>
+                    @helper.CSRF.formField
+                    <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Logout">Logout</button>
                 </a>
+                </form>
             </div>
         </nav>
         ​
