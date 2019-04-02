@@ -6,8 +6,16 @@
 
 GET     /home                       controllers.HomeController.getHome
 
-GET     /customer                   controllers.CustomerController.getCustomer
-POST    /customer                   controllers.CustomerController.postCustomer
+GET     /customer/:id               controllers.CustomerController.getCustomer(id:Integer)
+GET     /customeradd                controllers.CustomerController.getCustomerAdd
+POST    /customeradd                controllers.CustomerController.postCustomerAdd
+GET     /customeredit/:id           controllers.CustomerController.getCustomerEdit(id:Integer)
+POST    /customeredit/:id           controllers.CustomerController.postCustomerEdit(id:Integer)
+GET     /customersearch             controllers.CustomerController.getCustomerSearch
+
+
+GET     /device/:id                 controllers.DeviceController.getDevice(id:Integer)
+
 
 GET     /employee/:id               controllers.EmployeeController.getEmployee(id:Integer)
 GET     /employeeadd                controllers.EmployeeController.getEmployeeAdd
@@ -22,6 +30,8 @@ POST    /itemadd                    controllers.ItemController.postItemAdd
 GET     /itemedit/:id               controllers.ItemController.getItemEdit(id:Integer)
 POST    /itemedit/:id               controllers.ItemController.postItemEdit(id:Integer)
 GET     /itemsearch                 controllers.ItemController.getItemSearch
+
+GET     /workorder/:id               controllers.WorkOrderController.getWorkOrder(id:Integer)
 
 
 GET     /login                      controllers.SessionController.getLogin

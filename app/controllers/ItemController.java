@@ -173,7 +173,7 @@ public class ItemController extends BaseController
 
         String itemName = form.get("itemName");
         int categoryId = Integer.parseInt(form.get("categoryId"));
-        BigDecimal retailPrice = new BigDecimal("retailPrice");
+        BigDecimal retailPrice = new BigDecimal (form.get("retailPrice"));
         BigDecimal unitPrice = new BigDecimal(form.get("unitPrice"));
 
 
@@ -184,7 +184,26 @@ public class ItemController extends BaseController
         item.setUnitPrice(unitPrice);
         db.em().persist(item);
 
-        db.em().persist(item);
+        Http.MultipartFormData<File> formData = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart<File> filePart = formData.getFile("picture");
+        File file = filePart.getFile();
+
+        byte[] picture;
+
+        try
+        {
+            picture = Files.toByteArray(file);
+
+            if (picture != null && picture.length > 0)
+            {
+                item.setPicture(picture);
+            }
+        } catch (Exception e)
+        {
+            picture = null;
+        }
+
+
 
         return ok("saved");
     }

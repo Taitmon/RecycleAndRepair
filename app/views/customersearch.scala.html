@@ -1,0 +1,114 @@
+@(customers : List[CustomerDetail])
+@doctype.render
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Items</title>
+        <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+        <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body class="bg-secondary">
+        ​
+        <nav class="navbar navbar-expand-lg text-light bg-dark mb-4">
+            <a class="navbar-brand text-white" href="/home">Home</a>
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                ​
+                <!-- Search form -->
+                <form class="form-inline ml-auto">
+                    <div class="md-form my-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Customer Name" aria-label="Search"
+                               name="name">
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
+                    </div>
+                </form>
+                <form method="post" action="/logout">
+                    <a href="/login">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Logout">Logout</button>
+                    </a>
+                </form>
+            </div>
+        </nav>
+        ​
+        <form></form>
+        <div class="container">
+            <h1 class="text-light display-1 text-center">Customer List</h1>
+
+            <table class="table table-hover table-dark table-striped table-bordered">
+                <tr>
+                    <th class="bg-danger">
+                        <form>
+                            <input type="hidden" name="sortColumn" value="customerIdASC">
+                            <input type="submit" value="▲" class="btn btn-danger btn-sm">
+                        </form>
+                        Customer Id
+                        <form>
+                            <input type="hidden" name="sortColumn" value="customerIdDESC">
+                            <input type="submit" value="▼" class="btn btn-danger btn-sm">
+                        </form>
+                    </th>
+                    <th class="bg-danger">
+                        <form>
+                            <input type="hidden" name="sortColumn" value="firstNameASC">
+                            <input type="submit" value="▲" class="btn btn-danger btn-sm">
+                        </form>
+                        First Name
+                        <form>
+                            <input type="hidden" name="sortColumn" value="firstNameDESC">
+                            <input type="submit" value="▼" class="btn btn-danger btn-sm">
+                        </form>
+                    </th>
+                    <th class="bg-danger">
+                        <form>
+                            <input type="hidden" name="sortColumn" value="lastNameASC">
+                            <input type="submit" value="▲" class="btn btn-danger btn-sm">
+                        </form>
+                        Last Name
+                        <form>
+                            <input type="hidden" name="sortColumn" value="lastNameDESC">
+                            <input type="submit" value="▼" class="btn btn-danger btn-sm">
+                        </form>
+                    </th>
+                    <th class="bg-danger">
+                        <form>
+                            <input type="hidden" name="sortColumn" value="phoneNumberASC">
+                            <input type="submit" value="▲" class="btn btn-danger btn-sm">
+                        </form>
+                        Phone Number
+                        <form>
+                            <input type="hidden" name="sortColumn" value="phoneNumberDESC">
+                            <input type="submit" value="▼" class="btn btn-danger btn-sm">
+                        </form>
+                    </th>
+                    <th class="bg-danger">
+                        <form>
+                            <input type="hidden" name="sortColumn" value="emailASC">
+                            <input type="submit" value="▲" class="btn btn-danger btn-sm">
+                        </form>
+                        Email
+                        <form>
+                            <input type="hidden" name="sortColumn" value="emailDESC">
+                            <input type="submit" value="▼" class="btn btn-danger btn-sm">
+                        </form>
+                    </th>
+                    <th class="bg-danger">Edit Customers</th>
+
+                </tr>
+                @for(customer<-customers){
+                <tr>
+                    <td>@customer.getCustomerId</td>
+                    <td>@customer.getFirstName</td>
+                    <td>@customer.getLastName</td>
+                    <td>@customer.getPhoneNumber</td>
+                    <td>@customer.getEmail</td>
+
+                    <td class="text-center">
+                        <a href="/customeredit/@customer.getCustomerId" class="btn btn-outline-danger btn-block">Edit</a></td>
+                </tr>
+                }
+
+            </table>
+        </div>
+    </body>
+</html>

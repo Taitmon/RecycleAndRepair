@@ -1,9 +1,9 @@
-@(customer : Customer)
+@(device : DeviceDetail)
 @doctype.render
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Employees</title>
+        <title>Devices</title>
         <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
         <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
     </head>
@@ -17,7 +17,7 @@
                 <!-- Search form -->
                 <form class="form-inline ml-auto">
                     <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Employee Name" aria-label="Search"
+                        <input class="form-control mr-sm-2" type="text" placeholder="Device IMEI" aria-label="Search"
                                name="name">
                         <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
                     </div>
@@ -33,30 +33,25 @@
         ​
         <div class="container">
             <div class="page-header">
-                <h1>Customer Information</h1>
+                <h1>Device Information</h1>
             </div>
             <div class="row">
                 <div class="col-9">
                     <div class="row mb-2">
                         <div class="col-4">
-                            <label class="badge badge-info">First Name</label>
-                            @customer.getFirstName
+                            <label class="badge badge-danger">Device Id</label>
+                            @device.getDeviceId
                         </div>
                         <div class="col-4">
-                            <label class="badge badge-info">Phone Number</label>
-                            @customer.getPhoneNumber
+                            <label class="badge badge-danger">IMEI Number</label>
+                            @device.getIMEI
                         </div>
                         <div class="col-4">
-                            <label class="badge badge-info">Email</label>
-                            @customer.getEmail
+                            <label class="badge badge-danger">Model</label>
+                            @device.getModelName
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <label class="badge badge-info">Last Name</label>
-                            @customer.getLastName
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@ CREATE TABLE Category (
 
 
 CREATE TABLE Item (
-                ItemId INT NOT NULL,
+                ItemId INT AUTO_INCREMENT NOT NULL,
                 ItemName VARCHAR(30) NOT NULL,
                 CategoryId INT NOT NULL,
                 RetailPrice DECIMAL NOT NULL,

@@ -1,12 +1,13 @@
+@(customer : Customer)
 @doctype.render
-<html lang = "en">
+<html lang="en">
     <head>
-        <meta charset = "UTF-8">
-        <title>Employees</title>
-        <link rel = "stylesheet" href = "/assets/lib/bootstrap/css/bootstrap.min.css">
-        <script src = "/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+        <meta charset="UTF-8">
+        <title>Items</title>
+        <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+        <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
     </head>
-    <body class = "bg-secondary">
+    <body class="bg-secondary">
         ​
         <nav class="navbar navbar-expand-lg text-light bg-dark mb-4">
             <a class="navbar-brand text-white" href="/home">Home</a>
@@ -16,7 +17,8 @@
                 <!-- Search form -->
                 <form class="form-inline ml-auto">
                     <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Employee Name" aria-label="Search" name = "name">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Customer Name" aria-label="Search"
+                               name="name">
                         <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
                     </div>
                 </form>
@@ -28,17 +30,14 @@
                 </form>
             </div>
         </nav>
-        ​
-        <p>Add Employee</p>
-        <form method="post" enctype="multipart/form-data">
+        <p>@customer.getFirstName</p>
+        <form method="post">
             @helper.CSRF.formField
-            <input type="text" name = "firstName" placeholder="First Name">
-            <input type="text" name = "lastName" placeholder="Last Name">
-            <input type="text" name = "phoneNumber" placeholder="Phone Number">
-            <input type="email" name = "email" placeholder="Email">
-
+            <input type="text" value="@customer.getFirstName" name="firstName">
+            <input type="text" value="@customer.getLastName" name="lastName">
+            <input type="tel" value="@customer.getPhoneNumber" name="phoneNumber">
+            <input type="text" value="@customer.getEmail" name="email">
             <input type="submit" value="Save">
-
         </form>
     </body>
 </html>

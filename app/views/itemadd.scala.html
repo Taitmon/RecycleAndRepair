@@ -31,7 +31,7 @@
             </div>
         </nav>
         <p>Add Item</p>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             @helper.CSRF.formField
             <input type="text" value="itemName" name="itemName">
 
@@ -40,8 +40,6 @@
                 <option value="@category.getCategoryId" @if(category.getCategoryId==category.getCategoryId){selected}> @category.getCategoryName</option>
                 }
             </select>
-
-            <input type="number" value="categoryId" name="categoryName">
             <input type="number" step="0.01" value="retailPrice" name="retailPrice">
             <input type="number" step="0.01" value="unitPrice" name="unitPrice">
             <input type="file" id="picture" name="picture">
