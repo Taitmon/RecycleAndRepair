@@ -22,7 +22,7 @@ public class BaseController extends Controller
        return session().containsKey(LOGGED_IN_EMPLOYEE);
     }
 
-    public Integer loggedInUserId()
+    public Integer getLoggedInEmployeeId()
     {
         String employeeIdText = session().get(LOGGED_IN_EMPLOYEE);
         Integer employeeId = null;

@@ -1,9 +1,13 @@
 package models;
 
+import controllers.WorkOrderController;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 public class WorkOrderDetail
@@ -17,8 +21,14 @@ public class WorkOrderDetail
     private String  modelName;
     private String  customerFirstName;
     private String  customerLastName;
+    private String  customerPhoneNumber;
+    private String  customerEmail;
+    private LocalDateTime dateTime;
+    private String  customerName;
+    private String  employeeName;
+    private BigDecimal saleTotal;
 
-    public WorkOrderDetail(int workOrderId, String employeeFirstName, String employeeLastName, int deviceId, String modelName, String customerFirstName, String customerLastName)
+    public WorkOrderDetail(int workOrderId, String employeeFirstName, String employeeLastName, int deviceId, String modelName, String customerFirstName, String customerLastName, String customerPhoneNumber, String customerEmail, LocalDateTime dateTime)
     {
         this.workOrderId = workOrderId;
         this.employeeFirstName = employeeFirstName;
@@ -27,6 +37,9 @@ public class WorkOrderDetail
         this.modelName = modelName;
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
+        this.customerPhoneNumber = customerPhoneNumber;
+        this.customerEmail = customerEmail;
+        this.dateTime = dateTime;
     }
 
     public int getWorkOrderId()
@@ -62,5 +75,38 @@ public class WorkOrderDetail
     public String getCustomerLastName()
     {
         return customerLastName;
+    }
+
+    public String getCustomerPhoneNumber()
+    {
+        return customerPhoneNumber;
+    }
+
+    public String getCustomerEmail()
+    {
+        return customerEmail;
+    }
+
+    public LocalDateTime getDateTime()
+    {
+        return dateTime;
+    }
+
+    public String getCustomerName()
+    {
+        customerName = customerFirstName + " " + customerLastName;
+        return customerName;
+    }
+
+    public String getEmployeeName()
+    {
+        employeeName = employeeFirstName + " " + employeeLastName;
+        return employeeName;
+    }
+
+    public BigDecimal getSaleTotal()
+    {
+
+        return saleTotal;
     }
 }

@@ -1,4 +1,4 @@
-@(workOrder : WorkOrderDetail)
+@(workOrder : WorkOrderDetail, workOrderItems : List[WorkOrderItemsDetail], saleTotal :  java.math.BigDecimal )
 @doctype.render
     <head>
         <meta charset = "UTF-8">
@@ -37,29 +37,71 @@
                 <div class="col-9">
                     <div class="row mb-2">
                         <div class="col-4">
-                            <label class="badge badge-info">Work Order Id</label>
+                            <label class="badge badge-danger">Work Order Id</label>
                             @workOrder.getWorkOrderId
                         </div>
                         <div class="col-4">
-                            <label class="badge badge-info">Employee</label>
-                            @workOrder.getEmployeeFirstName
-                            @workOrder.getEmployeeLastName
+                            <label class="badge badge-danger">Employee</label>
+                            @workOrder.getEmployeeName
+
                         </div>
                         <div class="col-4">
-                            <label class="badge badge-info">Device</label>
-                            @workOrder.getDeviceId
+                            <label class="badge badge-danger">Device Model</label>
                             @workOrder.getModelName
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-4">
-                            <label class="badge badge-info">Customer</label>
-                            @workOrder.getCustomerFirstName
-                            @workOrder.getCustomerLastName
+                            <label class="badge badge-danger">Customer</label>
+                            @workOrder.getCustomerName
+                        </div>
+                        <div class="col-4">
+                            <label class="badge badge-danger">Device Id</label>
+                            @workOrder.getDeviceId
+                        </div>
+                        <div class="col-6">
+                            <label class="badge badge-danger">Work Order Created</label>
+                            @workOrder.getDateTime
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="badge badge-danger">Customer Contact Information</label>
+                            @workOrder.getCustomerPhoneNumber
+                            @workOrder.getCustomerEmail
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <form method="get" action="/workorder/@workOrder.getWorkOrderId">
+            <a href="/workorder/@workOrder.getWorkOrderId">
+                @helper.CSRF.formField
+                <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="addItem">Add Item</button>
+            </a>
+        </form>
+        <table class="table table-hover table-dark table-striped table-bordered">
+            <tr>
+
+                <th class="bg-danger" value="Items">Items</th>
+                <th class="bg-danger" value="Items">Item Price</th>
+                <th class="bg-danger" value="Items">Quantity</th>
+                <th class="bg-danger" value="Items">Quantity Cost</th>
+
+                @for(workOrderItem<-workOrderItems){
+            <tr>
+            <td>@workOrderItem.getItemName</td>
+            <td>@workOrderItem.getRetailPrice</td>
+            <td>@workOrderItem.getQuantity</td>
+            <td>@workOrderItem.getRetailTotal</td>
+
+        </tr>
+            }
+            <th class="bg-danger" value="Items"></th>
+            <th class="bg-danger" value="Items"></th>
+            <th class="bg-danger" value="Items">Sale Total</th>
+
+            <td>@saleTotal</td>
+        </table>
     </body>
 </html>

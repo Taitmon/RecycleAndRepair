@@ -1,4 +1,4 @@
-@(items : List[ItemDetail])
+@(workorders : List[WorkOrderDetail])
 @doctype.render
 <html lang="en">
     <head>
@@ -17,89 +17,99 @@
                 <!-- Search form -->
                 <form class="form-inline ml-auto">
                     <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Item Name" aria-label="Search"
-                               name="name">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Work Order Info" aria-label="Search" name="name">
                         <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
                     </div>
                 </form>
-                <form method="get" action="/itemadd">
-                    <a href="/itemadd">
+                <form method="get" action="/workorderadd">
+                    <a href="/workorderadd">
                         @helper.CSRF.formField
-                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Logout">Create Item
-                        </button>
-                    </a>
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Create WO">Create WO</button></a>
                 </form>
                 <form method="post" action="/logout">
-                <a href="/login">
-                    @helper.CSRF.formField
-                    <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Logout">Logout</button>
-                </a>
+                    <a href="/login">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Logout">Logout</button>
+                    </a>
                 </form>
             </div>
         </nav>
         ​
         <form></form>
         <div class="container">
-            <h1 class="text-light display-1 text-center">Item List</h1>
-
+            <h1 class="text-light display-1 text-center">Work Orders</h1>
             <table class="table table-hover table-dark table-striped table-bordered">
                 <tr>
                     <th class="bg-danger">
                         <form>
-                            <input type="hidden" name="sortColumn" value="itemIdASC">
+                            <input type="hidden" name="sortColumn" value="workOrderIdASC">
                             <input type="submit" value="▲" class="btn btn-danger btn-sm">
                         </form>
-                        Item Id
+                        Work Order Id
                         <form>
-                            <input type="hidden" name="sortColumn" value="itemIdDESC">
+                            <input type="hidden" name="sortColumn" value="workOrderIdDESC">
                             <input type="submit" value="▼" class="btn btn-danger btn-sm">
                         </form>
                     </th>
                     <th class="bg-danger">
                         <form>
-                            <input type="hidden" name="sortColumn" value="itemNameASC">
+                            <input type="hidden" name="sortColumn" value="dateTimeASC">
                             <input type="submit" value="▲" class="btn btn-danger btn-sm">
                         </form>
-                        Item Name
+                        Work Order Created
                         <form>
-                            <input type="hidden" name="sortColumn" value="itemNameDESC">
+                            <input type="hidden" name="sortColumn" value="dateTimeDESC">
                             <input type="submit" value="▼" class="btn btn-danger btn-sm">
                         </form>
                     </th>
                     <th class="bg-danger">
                         <form>
-                            <input type="hidden" name="sortColumn" value="categoryNameASC">
+                            <input type="hidden" name="sortColumn" value="customerNameASC">
                             <input type="submit" value="▲" class="btn btn-danger btn-sm">
                         </form>
-                        Item Category
+                        Customer Name
                         <form>
-                            <input type="hidden" name="sortColumn" value="categoryNameDESC">
+                            <input type="hidden" name="sortColumn" value="customerNameDESC">
                             <input type="submit" value="▼" class="btn btn-danger btn-sm">
                         </form>
                     </th>
                     <th class="bg-danger">
                         <form>
-                            <input type="hidden" name="sortColumn" value="retailPriceASC">
+                            <input type="hidden" name="sortColumn" value="customerPhoneNumberASC">
                             <input type="submit" value="▲" class="btn btn-danger btn-sm">
                         </form>
-                        Retail Price
+                        Customer Phone
                         <form>
-                            <input type="hidden" name="sortColumn" value="retailPriceDESC">
+                            <input type="hidden" name="sortColumn" value="customerPhoneNumberDESC">
                             <input type="submit" value="▼" class="btn btn-danger btn-sm">
                         </form>
                     </th>
-                    <th class="bg-danger">Edit Items</th>
+                    <th class="bg-danger">
+                        <form>
+                            <input type="hidden" name="sortColumn" value="employeeNameASC">
+                            <input type="submit" value="▲" class="btn btn-danger btn-sm">
+                        </form>
+                        Assigned Employee
+                        <form>
+                            <input type="hidden" name="sortColumn" value="employeeNameDESC">
+                            <input type="submit" value="▼" class="btn btn-danger btn-sm">
+                        </form>
+                    </th>
+
+                    <th class="bg-danger" ><Br> View Work Orders</th>
+
 
                 </tr>
-                @for(item<-items){
+                @for(workorder<-workorders){
                 <tr>
-                    <td>@item.getItemId</td>
-                    <td>@item.getItemName</td>
-                    <td>@item.getCategoryName</td>
-                    <td>@item.getRetailPrice</td>
+                    <td>@workorder.getWorkOrderId</td>
+                    <td>@workorder.getDateTime</td>
+                    <td>@workorder.getCustomerName</td>
+                    <td>@workorder.getCustomerPhoneNumber</td>
+                    <td>@workorder.getEmployeeName</td>
 
                     <td class="text-center">
-                        <a href="/itemedit/@item.getItemId" class="btn btn-outline-danger btn-block">Edit</a></td>
+                        <a href="/workorder/@workorder.getWorkOrderId" class="btn btn-outline-danger btn-block">View WO</a></td>
                 </tr>
                 }
 

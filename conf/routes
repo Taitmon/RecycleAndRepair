@@ -31,8 +31,9 @@ GET     /itemedit/:id               controllers.ItemController.getItemEdit(id:In
 POST    /itemedit/:id               controllers.ItemController.postItemEdit(id:Integer)
 GET     /itemsearch                 controllers.ItemController.getItemSearch
 
-GET     /workorder/:id               controllers.WorkOrderController.getWorkOrder(id:Integer)
-
+GET     /workorder/:id              controllers.WorkOrderController.getWorkOrder(id:Integer)
+GET     /workorderadd               controllers.WorkOrderController.getWorkOrderAdd
+GET     /workordersearch            controllers.WorkOrderController.getWorkOrderSearch
 
 GET     /login                      controllers.SessionController.getLogin
 POST    /login                      controllers.SessionController.postLogin
