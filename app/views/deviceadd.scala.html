@@ -1,12 +1,13 @@
+@(models : List[Model])
 @doctype.render
-<html lang = "en">
+<html lang="en">
     <head>
-        <meta charset = "UTF-8">
-        <title>Customers</title>
-        <link rel = "stylesheet" href = "/assets/lib/bootstrap/css/bootstrap.min.css">
-        <script src = "/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+        <meta charset="UTF-8">
+        <title>Items</title>
+        <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+        <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
     </head>
-    <body class = "bg-secondary">
+    <body class="bg-secondary">
         ​
         <nav class="navbar navbar-expand-lg text-light bg-dark mb-4">
             <a class="navbar-brand text-white" href="/home">Home</a>
@@ -16,7 +17,8 @@
                 <!-- Search form -->
                 <form class="form-inline ml-auto">
                     <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Customer Name" aria-label="Search" name = "name">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Item Name" aria-label="Search"
+                               name="name">
                         <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
                     </div>
                 </form>
@@ -28,15 +30,18 @@
                 </form>
             </div>
         </nav>
-        ​
-        <p>Add Customer</p>
-        <form method="post" enctype="multipart/form-data">
+        <p>Add Item</p>
+        <form method="post">
             @helper.CSRF.formField
-            <input type="text" name = "firstName" placeholder="First Name">
-            <input type="text" name = "lastName" placeholder="Last Name">
-            <input type="tel" name = "phoneNumber" placeholder="Phone Number">
-            <input type="email" name = "email" placeholder="Email">
-
+            <select name="modelId">
+                @for(model<-models){
+                <option value="@model.getModelId">
+                    @if(model.getModelId==model.getModelId){selected}
+                    @model.getModelName
+                </option>
+                }
+            </select>
+            <input type="text" value="IMEI" name="IMEI" maxlength="15" minlength="15">
             <input type="submit" value="Save">
 
         </form>

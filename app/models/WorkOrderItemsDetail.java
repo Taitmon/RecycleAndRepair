@@ -23,6 +23,7 @@ public class WorkOrderItemsDetail
     private int itemTotal;
     private int workOrderIdCount;
 
+
     //TODO NEED TO ADD ALL COLUMNS TO ENABLE CREATE WORK ORDER PAGE
 
     public WorkOrderItemsDetail(int workOrderItemsId, String itemName, int quantity, int workOrderId, BigDecimal discount, BigDecimal retailPrice, BigDecimal saleTotal)

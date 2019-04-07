@@ -1,0 +1,97 @@
+@(devices : List[DeviceDetail])
+@doctype.render
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Items</title>
+        <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+        <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body class="bg-secondary">
+        ​
+        <nav class="navbar navbar-expand-lg text-light bg-dark mb-4">
+            <a class="navbar-brand text-white" href="/home">Home</a>
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                ​
+                <!-- Search form -->
+                <form class="form-inline ml-auto">
+                    <div class="md-form my-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Customer Name" aria-label="Search"
+                               name="name">
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
+                    </div>
+                </form>
+                <form method="get" action="/deviceadd">
+                    <a href="/deviceadd">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Logout">Create Device
+                        </button>
+                    </a>
+                </form>
+                <form method="post" action="/logout">
+                    <a href="/login">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Logout">Logout</button>
+                    </a>
+                </form>
+            </div>
+        </nav>
+        ​
+        <form></form>
+        <div class="container">
+            <h1 class="text-light display-1 text-center">Device List</h1>
+
+            <table class="table table-hover table-dark table-striped table-bordered">
+                <tr>
+                    <th class="bg-danger">
+                        <form>
+                            <input type="hidden" name="sortColumn" value="deviceIdASC">
+                            <input type="submit" value="▲" class="btn btn-danger btn-sm">
+                        </form>
+                        Device Id
+                        <form>
+                            <input type="hidden" name="sortColumn" value="deviceIdDESC">
+                            <input type="submit" value="▼" class="btn btn-danger btn-sm">
+                        </form>
+                    </th>
+                    <th class="bg-danger">
+                        <form>
+                            <input type="hidden" name="sortColumn" value="IMEIASC">
+                            <input type="submit" value="▲" class="btn btn-danger btn-sm">
+                        </form>
+                        IMEI
+                        <form>
+                            <input type="hidden" name="sortColumn" value="IMEIDESC">
+                            <input type="submit" value="▼" class="btn btn-danger btn-sm">
+                        </form>
+                    </th>
+                    <th class="bg-danger">
+                        <form>
+                            <input type="hidden" name="sortColumn" value="modelNameASC">
+                            <input type="submit" value="▲" class="btn btn-danger btn-sm">
+                        </form>
+                        Model Name
+                        <form>
+                            <input type="hidden" name="sortColumn" value="modelNameDESC">
+                            <input type="submit" value="▼" class="btn btn-danger btn-sm">
+                        </form>
+                    </th>
+                    <th class="bg-danger"><br>Edit Devices</th>
+
+                </tr>
+                @for(device<-devices){
+                <tr>
+                    <td>@device.getDeviceId</td>
+                    <td>@device.getIMEI</td>
+                    <td>@device.getModelName</td>
+
+                    <td class="text-center">
+                        <a href="/createworkorder" class="btn btn-outline-danger btn-block">Select</a></td>
+                </tr>
+                }
+
+            </table>
+        </div>
+    </body>
+</html>

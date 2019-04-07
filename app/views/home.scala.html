@@ -6,11 +6,65 @@
         <script src = "/assets/lib/bootstrap/js/bootstrap.min.js"></script>
         <title>RAR</title>
     </head>
-    <body>
-        <a href = "/employeesearch" class = "btn btn-outline-info btn-block">Employees</a></td>
-        <a href = "/customersearch" class = "btn btn-outline-info btn-block">Customers</a></td>
-        <a href = "/itemsearch" class = "btn btn-outline-info btn-block">Inventory</a></td>
-        <a href = "/workordersearch" class = "btn btn-outline-info btn-block">Workorders</a></td>
-        <a href = "/login" class = "btn btn-outline-info btn-block">logout</a></td>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Items</title>
+            <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+            <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+        </head>
+        <body class="bg-secondary">
+            ​
+            <nav class="navbar navbar-expand-lg text-light bg-dark mb-4">
+                <a class="navbar-brand text-white" href="/home">Home</a>
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse" id="Employees">
+                    <form method="get" action="/employeesearch">
+                        <a href="/employeesearch">
+                            @helper.CSRF.formField
+                            <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Employees">Employees</button>
+                        </a>
+                    </form>
+                    <form method="get" action="/customersearch">
+                        <a href="/customersearch">
+                            @helper.CSRF.formField
+                            <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Customers</button>
+                        </a>
+                    </form>
+                    <form method="get" action="/devicesearch">
+                        <a href="/devicesearch">
+                            @helper.CSRF.formField
+                            <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Devices</button>
+                        </a>
+                    </form>
+                    <form method="get" action="/itemsearch">
+                        <a href="/itemrsearch">
+                            @helper.CSRF.formField
+                            <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Items</button>
+                        </a>
+                    </form>
+                    <form method="get" action="/workordersearch">
+                        <a href="/workordersearch">
+                            @helper.CSRF.formField
+                            <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Work Orders</button>
+                        </a>
+                    </form>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form method="post" action="/logout">
+                        <a href="/login">
+                            @helper.CSRF.formField
+                            <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Logout">Logout</button>
+                        </a>
+                    </form>
+                </div>
+            </nav>
+
+        <form method="get" action="/workorderadd">
+            <a href="/workorderadd">
+                @helper.CSRF.formField
+                <button class="btn btn-outline-info btn-block" value="Create WO">Create WO</button></a>
+        </form>
     </body>
+
 </html>

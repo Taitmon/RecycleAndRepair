@@ -16,7 +16,7 @@ public class WorkOrderItems
     private int quantity;
     private int workOrderId;
     private BigDecimal discount;
-    private BigDecimal retailPrice;
+
 
     public int getWorkOrderItemsId()
     {
@@ -68,13 +68,4 @@ public class WorkOrderItems
         this.discount = discount;
     }
 
-    public BigDecimal getRetailPrice()
-    {
-        return retailPrice;
-    }
-
-    public void setRetailPrice(BigDecimal retailPrice)
-    {
-        this.retailPrice = retailPrice;
-    }
 }

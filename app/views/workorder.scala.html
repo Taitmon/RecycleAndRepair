@@ -1,10 +1,13 @@
-@(workOrder : WorkOrderDetail, workOrderItems : List[WorkOrderItemsDetail], saleTotal :  java.math.BigDecimal )
+@(workOrder : WorkOrderDetail, workOrderItems : List[WorkOrderItemsDetail], saleTotal :  java.math.BigDecimal,
+items : List[Item])
 @doctype.render
     <head>
         <meta charset = "UTF-8">
         <title>Employees</title>
         <link rel = "stylesheet" href = "/assets/lib/bootstrap/css/bootstrap.min.css">
         <script src = "/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/assets/lib/popper.js/umd/popper.min.js"></script>
+        <script src="/assets/lib/jquery/jquery.min.js"></script>
     </head>
     <body class = "bg-secondary">
         ​
@@ -74,19 +77,28 @@
                 </div>
             </div>
         </div>
-        <form method="get" action="/workorder/@workOrder.getWorkOrderId">
-            <a href="/workorder/@workOrder.getWorkOrderId">
-                @helper.CSRF.formField
-                <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="addItem">Add Item</button>
-            </a>
+        <form method="post" action="/workorder/@workOrder.getWorkOrderId">
+            @helper.CSRF.formField
+            <select name="itemId">
+                @for(item<-items){
+                <option name="itemId" value="@item.getItemId" @if(item.getItemId==item.getItemId){selected}>
+                    @item.getItemName
+                </option>
+                }
+            </select>
+            <input type="number" value="quantity" name="quantity" required>
+
+            <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="addItem" type="submit">Add Item</button>
         </form>
+
         <table class="table table-hover table-dark table-striped table-bordered">
             <tr>
 
-                <th class="bg-danger" value="Items">Items</th>
-                <th class="bg-danger" value="Items">Item Price</th>
-                <th class="bg-danger" value="Items">Quantity</th>
-                <th class="bg-danger" value="Items">Quantity Cost</th>
+                <th class="bg-danger" >Items</th>
+                <th class="bg-danger" >Item Price</th>
+                <th class="bg-danger" >Quantity</th>
+                <th class="bg-danger" >Quantity Cost</th>
+                <th class="bg-danger" ></th>
 
                 @for(workOrderItem<-workOrderItems){
             <tr>
@@ -94,6 +106,14 @@
             <td>@workOrderItem.getRetailPrice</td>
             <td>@workOrderItem.getQuantity</td>
             <td>@workOrderItem.getRetailTotal</td>
+
+            <td>
+            <form method="post" action="/workorderdelete/@workOrderItem.getWorkOrderItemsId">
+                @helper.CSRF.formField
+                    <input type="hidden" name="workOrderId" value="@workOrder.getWorkOrderId" >
+                    <input type="submit" value="Remove Item" class="btn btn-danger btn-sm">
+            </form>
+            </td>
 
         </tr>
             }

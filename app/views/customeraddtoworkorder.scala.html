@@ -30,11 +30,11 @@
         </nav>
         ​
         <p>Add Customer</p>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post"  action="/createworkorder">
             @helper.CSRF.formField
             <input type="text" name = "firstName" placeholder="First Name">
             <input type="text" name = "lastName" placeholder="Last Name">
-            <input type="tel" name = "phoneNumber" placeholder="Phone Number">
+            <input type="tel" name = "phoneNumber" placeholder="Phone Number" minlength="12" maxlength="12">
             <input type="email" name = "email" placeholder="Email">
 
             <input type="submit" value="Save">

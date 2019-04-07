@@ -14,7 +14,13 @@ POST    /customeredit/:id           controllers.CustomerController.postCustomerE
 GET     /customersearch             controllers.CustomerController.getCustomerSearch
 
 
+
 GET     /device/:id                 controllers.DeviceController.getDevice(id:Integer)
+GET     /devicesearch               controllers.DeviceController.getDeviceSearch
+GET     /deviceedit/:id             controllers.DeviceController.getDeviceEdit(id:Integer)
+POST    /deviceedit/:id             controllers.DeviceController.postDeviceEdit(id:Integer)
+GET     /deviceadd                  controllers.DeviceController.getDeviceAdd
+POST    /deviceadd                  controllers.DeviceController.postDeviceAdd
 
 
 GET     /employee/:id               controllers.EmployeeController.getEmployee(id:Integer)
@@ -32,8 +38,17 @@ POST    /itemedit/:id               controllers.ItemController.postItemEdit(id:I
 GET     /itemsearch                 controllers.ItemController.getItemSearch
 
 GET     /workorder/:id              controllers.WorkOrderController.getWorkOrder(id:Integer)
-GET     /workorderadd               controllers.WorkOrderController.getWorkOrderAdd
+POST    /workorder/:id              controllers.WorkOrderController.postWorkOrder(id:Integer)
+POST    /workorderdelete/:id        controllers.WorkOrderController.postWorkOrderDeleteItem(id:Integer)
 GET     /workordersearch            controllers.WorkOrderController.getWorkOrderSearch
+GET     /workorderadd               controllers.WorkOrderController.getWorkOrderAdd
+GET     /existingcustomer           controllers.WorkOrderController.getExistingCustomer
+GET     /customeraddtoworkorder     controllers.WorkOrderController.getCustomerAddToWorkOrder
+POST    /customeraddtoworkorder     controllers.WorkOrderController.postCustomerAddToWorkOrder
+GET     /addorexistingdevice        controllers.WorkOrderController.getAddOrExistingDevice
+GET     /existingdevice             controllers.WorkOrderController.getExistingDevice
+GET     /deviceaddtoworkorder    controllers.WorkOrderController.getDeviceAddToWorkOrder
+POST    /deviceaddtoworkorder    controllers.WorkOrderController.postDeviceAddToWorkOrder
 
 GET     /login                      controllers.SessionController.getLogin
 POST    /login                      controllers.SessionController.postLogin
