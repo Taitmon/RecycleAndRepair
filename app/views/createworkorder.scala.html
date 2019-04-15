@@ -1,0 +1,84 @@
+@(selectedCustomerId : Integer, selectedDeviceId : Integer)
+@doctype.render
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Customers</title>
+        <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/stylesheets/index.css">
+        <link rel="stylesheet" href="/assets/stylesheets/index.css">
+        <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body class="bg-secondary" background="\assets\images\recycleandrepairicon.png">
+        ​
+        <nav class="navbar navbar-expand-lg text-light bg-dark mb-4">
+            <a class="navbar-brand text-white" href="/home">Home</a>
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="Employees">
+                <form method="get" action="/employeesearch">
+                    <a href="/employeesearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Employees">Employees
+                        </button>
+                    </a>
+                </form>
+                <form method="get" action="/customersearch">
+                    <a href="/customersearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Customers
+                        </button>
+                    </a>
+                </form>
+                <form method="get" action="/devicesearch">
+                    <a href="/devicesearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Devices
+                        </button>
+                    </a>
+                </form>
+                <form method="get" action="/itemsearch">
+                    <a href="/itemrsearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Items</button>
+                    </a>
+                </form>
+                <form method="get" action="/workordersearch">
+                    <a href="/workordersearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Work Orders
+                        </button>
+                    </a>
+                </form>
+                <!-- Search form -->
+                <form class="form-inline ml-auto">
+                    <div class="md-form my-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Customer Name" aria-label="Search"
+                               name="name">
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
+                    </div>
+                </form>
+                <form method="post" action="/logout">
+                    <a href="/login">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Logout">Logout</button>
+                    </a>
+                </form>
+            </div>
+        </nav>
+        ​
+        <p class="text-light display-1 text-center">
+            <label class="badge badge-dark">Create Work Order</label>
+        </p>
+        <form method="post" action="/createworkorder">
+            @helper.CSRF.formField
+            <input type="hidden" name="selectedCustomerId" value="@selectedCustomerId">
+            <input type="hidden" name="selectedDeviceId" value="@selectedDeviceId">
+            <input type="text" value="@selectedCustomerId" name="customerId" placeholder="Customer Id">
+            <input type="text" value="@selectedDeviceId" name="deviceId" placeholder="Device Id">
+            <input type="submit" value="Save">
+
+        </form>
+
+
+    </body>
+</html>
