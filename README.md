@@ -66,28 +66,6 @@ I used the following resources to build storefully:
 
 ### Extra images of the project
 
-Here are more images of the project that have the same functionality as the previously shown images.
 
-Viewing discs in the collection.
-![alt text](https://imgur.com/UbNATVE.jpg)
 
-Viewing albums in the collection.
-![alt text](https://imgur.com/zMWbLaR.jpg)
 
-Viewing games in the collection.
-![alt text](https://imgur.com/iXGSTcJ.jpg)
-
-Adding discs into the collection.
-![alt text](https://imgur.com/OA5g2s9.jpg)
-
-Adding albums into the collection.
-![alt text](https://imgur.com/9X84EnG.jpg)
-
-Adding games into the collection.
-![alt text](https://imgur.com/znCTZzU.jpg)
-
-Adding a new bookshelf to hold a collection.
-![alt text](https://imgur.com/VNMlY7V.jpg)
-
-An example of another bookshelf in the collection
-![alt text](https://imgur.com/2VsWUPE.jpg)
