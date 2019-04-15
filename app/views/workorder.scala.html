@@ -1,127 +1,167 @@
 @(workOrder : WorkOrderDetail, workOrderItems : List[WorkOrderItemsDetail], saleTotal :  java.math.BigDecimal,
 items : List[Item])
 @doctype.render
-    <head>
-        <meta charset = "UTF-8">
-        <title>Employees</title>
-        <link rel = "stylesheet" href = "/assets/lib/bootstrap/css/bootstrap.min.css">
-        <script src = "/assets/lib/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/assets/lib/popper.js/umd/popper.min.js"></script>
-        <script src="/assets/lib/jquery/jquery.min.js"></script>
-    </head>
-    <body class = "bg-secondary">
-        ​
-        <nav class="navbar navbar-expand-lg text-light bg-dark mb-4">
-            <a class="navbar-brand text-white" href="/home">Home</a>
-            <!-- Collapsible content -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                ​
-                <!-- Search form -->
-                <form class="form-inline ml-auto">
-                    <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Work Order Id" aria-label="Search" name = "name">
-                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
-                    </div>
-                </form>
-                <form method="post" action="/logout">
-                    <a href="/login">
-                        @helper.CSRF.formField
-                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Logout">Logout</button>
-                    </a>
-                </form>
-            </div>
-        </nav>
-        ​
-        <div class="container">
-            <div class="page-header">
-                <h1>Work Order</h1>
-            </div>
-            <div class="row">
-                <div class="col-9">
-                    <div class="row mb-2">
-                        <div class="col-4">
-                            <label class="badge badge-danger">Work Order Id</label>
-                            @workOrder.getWorkOrderId
-                        </div>
-                        <div class="col-4">
-                            <label class="badge badge-danger">Employee</label>
-                            @workOrder.getEmployeeName
-
-                        </div>
-                        <div class="col-4">
-                            <label class="badge badge-danger">Device Model</label>
-                            @workOrder.getModelName
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <label class="badge badge-danger">Customer</label>
-                            @workOrder.getCustomerName
-                        </div>
-                        <div class="col-4">
-                            <label class="badge badge-danger">Device Id</label>
-                            @workOrder.getDeviceId
-                        </div>
-                        <div class="col-6">
-                            <label class="badge badge-danger">Work Order Created</label>
-                            @workOrder.getDateTime
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <label class="badge badge-danger">Customer Contact Information</label>
-                            @workOrder.getCustomerPhoneNumber
-                            @workOrder.getCustomerEmail
-                        </div>
-                    </div>
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+    <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+    <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/lib/popper.js/umd/popper.min.js"></script>
+    <script src="/assets/lib/jquery/jquery.min.js"></script>
+    <link rel="stylesheet" href="/assets/stylesheets/index.css">
+</head>
+<body class="bg-secondary" background="\assets\images\recycleandrepairicon.png">
+    ​
+    <nav class="navbar navbar-expand-lg text-light bg-dark mb-4">
+        <a class="navbar-brand text-white" href="/home">Home</a>
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="Employees">
+            <form method="get" action="/employeesearch">
+                <a href="/employeesearch">
+                    @helper.CSRF.formField
+                    <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Employees">Employees
+                    </button>
+                </a>
+            </form>
+            <form method="get" action="/customersearch">
+                <a href="/customersearch">
+                    @helper.CSRF.formField
+                    <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Customers
+                    </button>
+                </a>
+            </form>
+            <form method="get" action="/devicesearch">
+                <a href="/devicesearch">
+                    @helper.CSRF.formField
+                    <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Devices
+                    </button>
+                </a>
+            </form>
+            <form method="get" action="/itemsearch">
+                <a href="/itemrsearch">
+                    @helper.CSRF.formField
+                    <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Items</button>
+                </a>
+            </form>
+            <form method="get" action="/workordersearch">
+                <a href="/workordersearch">
+                    @helper.CSRF.formField
+                    <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Work Orders
+                    </button>
+                </a>
+            </form>
+            ​
+            <!-- Search form -->
+            <form class="form-inline ml-auto" action="/workorder/workOrderId">
+                <div class="md-form my-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Work Order Id" aria-label="Search"
+                           value="workOrderId" name="workOrderId">
+                    <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
                 </div>
+            </form>
+            <form method="post" action="/logout">
+                <a href="/login">
+                    @helper.CSRF.formField
+                    <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Logout">Logout</button>
+                </a>
+            </form>
+        </div>
+    </nav>
+    ​
+
+    <div class="page-header">
+        <h3 class="text-light display-1 text-center">
+            <label class="badge badge-dark">Work Order</label>
+        </h3>
+    </div>
+
+    <div class="container mt-3">
+        <ul class="list-group " >
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Work Order Id
+                <span>@workOrder.getWorkOrderId</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Employee
+                <span>@workOrder.getEmployeeName</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Device Model
+                <span>@workOrder.getModelName</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Device IMEI (International Mobile Equipment Identity)
+                <span>@workOrder.getDeviceIMEI</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Work Order Created
+                <span>@workOrder.getDateTime</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Customer Name
+                <span>@workOrder.getCustomerName</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Customer Contact Information
+                <span>Phone: @workOrder.getCustomerPhoneNumber   _      Email: @workOrder.getCustomerEmail</span>
+            </li>
+        </ul>
+    </div>
+<br>
+    <div class="form-group">
+        <div class="form-select">
+            <div class="label-flex">
+
+                <form method="post" action="/workorder/@workOrder.getWorkOrderId">
+                    @helper.CSRF.formField
+                    <select name="itemId">
+                        @for(item<-items){
+                        <option name="itemId" value="@item.getItemId" @if(item.getItemId==item.getItemId){selected}>
+                            @item.getItemName
+                        </option>
+                        }
+                    </select>
+                    <input type="number" value="quantity" name="quantity" required>
+
+                    <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="addItem" type="submit">Add
+                        Item
+                    </button>
+                </form>
             </div>
         </div>
-        <form method="post" action="/workorder/@workOrder.getWorkOrderId">
-            @helper.CSRF.formField
-            <select name="itemId">
-                @for(item<-items){
-                <option name="itemId" value="@item.getItemId" @if(item.getItemId==item.getItemId){selected}>
-                    @item.getItemName
-                </option>
-                }
-            </select>
-            <input type="number" value="quantity" name="quantity" required>
+    </div>
 
-            <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="addItem" type="submit">Add Item</button>
-        </form>
+    <table class="table table-hover table-dark table-striped table-bordered">
+        <tr>
 
-        <table class="table table-hover table-dark table-striped table-bordered">
-            <tr>
+            <th class="bg-danger">Items</th>
+            <th class="bg-danger">Item Price</th>
+            <th class="bg-danger">Quantity</th>
+            <th class="bg-danger">Quantity Cost</th>
+            <th class="bg-danger"></th>
 
-                <th class="bg-danger" >Items</th>
-                <th class="bg-danger" >Item Price</th>
-                <th class="bg-danger" >Quantity</th>
-                <th class="bg-danger" >Quantity Cost</th>
-                <th class="bg-danger" ></th>
-
-                @for(workOrderItem<-workOrderItems){
-            <tr>
+            @for(workOrderItem<-workOrderItems){
+        <tr>
             <td>@workOrderItem.getItemName</td>
-            <td>@workOrderItem.getRetailPrice</td>
+            <td>$@workOrderItem.getRetailPrice</td>
             <td>@workOrderItem.getQuantity</td>
-            <td>@workOrderItem.getRetailTotal</td>
+            <td>$@workOrderItem.getRetailTotal</td>
 
             <td>
-            <form method="post" action="/workorderdelete/@workOrderItem.getWorkOrderItemsId">
-                @helper.CSRF.formField
-                    <input type="hidden" name="workOrderId" value="@workOrder.getWorkOrderId" >
+                <form method="post" action="/workorderdelete/@workOrderItem.getWorkOrderItemsId">
+                    @helper.CSRF.formField
+                    <input type="hidden" name="workOrderId" value="@workOrder.getWorkOrderId">
                     <input type="submit" value="Remove Item" class="btn btn-danger btn-sm">
-            </form>
+                </form>
             </td>
 
         </tr>
-            }
-            <th class="bg-danger" value="Items"></th>
-            <th class="bg-danger" value="Items"></th>
-            <th class="bg-danger" value="Items">Sale Total</th>
+        }
+        <th class="bg-danger" value="Items"></th>
+        <th class="bg-danger" value="Items"></th>
+        <th class="bg-danger" value="Items">Sale Total</th>
 
-            <td>@saleTotal</td>
-        </table>
-    </body>
+        <td>$@saleTotal</td>
+    </table>
+</body>
 </html>

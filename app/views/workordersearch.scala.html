@@ -4,27 +4,65 @@
     <head>
         <meta charset="UTF-8">
         <title>Items</title>
+        <link rel="stylesheet" href="/assets/stylesheets/searchtables.css">
         <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/stylesheets/index.css">
         <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
     </head>
-    <body class="bg-secondary">
+    <body class="bg-secondary" background="\assets\images\recycleandrepairicon.png">
         ​
         <nav class="navbar navbar-expand-lg text-light bg-dark mb-4">
-            <a class="navbar-brand text-white" href="/home">Home</a>
+            <a class="navbar-brand text-white" href="/home" >Home</a>
             <!-- Collapsible content -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                ​
+            <div class="collapse navbar-collapse" id="Employees">
+                <form method="get" action="/employeesearch">
+                    <a href="/employeesearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Employees">Employees
+                        </button>
+                    </a>
+                </form>
+                <form method="get" action="/customersearch">
+                    <a href="/customersearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Customers
+                        </button>
+                    </a>
+                </form>
+                <form method="get" action="/devicesearch">
+                    <a href="/devicesearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Devices
+                        </button>
+                    </a>
+                </form>
+                <form method="get" action="/itemsearch">
+                    <a href="/itemrsearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Items</button>
+                    </a>
+                </form>
+                <form method="get" action="/workordersearch">
+                    <a href="/workordersearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Work Orders
+                        </button>
+                    </a>
+                </form>
                 <!-- Search form -->
                 <form class="form-inline ml-auto">
                     <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Work Order Info" aria-label="Search" name="name">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Work Order Info"
+                               aria-label="Search" name="name">
                         <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
                     </div>
                 </form>
                 <form method="get" action="/workorderadd">
                     <a href="/workorderadd">
                         @helper.CSRF.formField
-                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Create WO">Create WO</button></a>
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Create WO">Create WO
+                        </button>
+                    </a>
                 </form>
                 <form method="post" action="/logout">
                     <a href="/login">
@@ -37,7 +75,9 @@
         ​
         <form></form>
         <div class="container">
-            <h1 class="text-light display-1 text-center">Work Orders</h1>
+            <h1 class="text-light display-1 text-center">
+                <label class="badge badge-dark">Work Orders</label>
+            </h1>
             <table class="table table-hover table-dark table-striped table-bordered">
                 <tr>
                     <th class="bg-danger">
@@ -86,6 +126,17 @@
                     </th>
                     <th class="bg-danger">
                         <form>
+                            <input type="hidden" name="sortColumn" value="IMEIASC">
+                            <input type="submit" value="▲" class="btn btn-danger btn-sm">
+                        </form>
+                        IMEI
+                        <form>
+                            <input type="hidden" name="sortColumn" value="IMEIDESC">
+                            <input type="submit" value="▼" class="btn btn-danger btn-sm">
+                        </form>
+                    </th>
+                    <th class="bg-danger">
+                        <form>
                             <input type="hidden" name="sortColumn" value="employeeNameASC">
                             <input type="submit" value="▲" class="btn btn-danger btn-sm">
                         </form>
@@ -96,7 +147,7 @@
                         </form>
                     </th>
 
-                    <th class="bg-danger" ><Br> View Work Orders</th>
+                    <th class="bg-danger"><Br> View Work Orders</th>
 
 
                 </tr>
@@ -106,10 +157,12 @@
                     <td>@workorder.getDateTime</td>
                     <td>@workorder.getCustomerName</td>
                     <td>@workorder.getCustomerPhoneNumber</td>
+                    <td>@workorder.getDeviceIMEI</td>
                     <td>@workorder.getEmployeeName</td>
 
                     <td class="text-center">
-                        <a href="/workorder/@workorder.getWorkOrderId" class="btn btn-outline-danger btn-block">View WO</a></td>
+                        <a href="/workorder/@workorder.getWorkOrderId" class="btn btn-outline-light btn-block">View
+                            WO</a></td>
                 </tr>
                 }
 

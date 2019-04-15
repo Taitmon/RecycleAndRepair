@@ -50,7 +50,7 @@ public class ItemController extends BaseController
         DynamicForm form = formFactory.form().bindFromRequest();
         String itemName = form.get("itemName");
         int categoryId = Integer.parseInt(form.get("categoryId"));
-        BigDecimal retailPrice = new BigDecimal("retailPrice");
+        BigDecimal retailPrice = new BigDecimal(form.get("retailPrice"));
         BigDecimal unitPrice = new BigDecimal(form.get("unitPrice"));
 
         //edit attributes
@@ -80,7 +80,7 @@ public class ItemController extends BaseController
             picture = null;
         }
 
-        return ok("saved");
+        return redirect("/itemsearch");
     }
 
     @Transactional(readOnly=true)
@@ -205,7 +205,7 @@ public class ItemController extends BaseController
 
 
 
-        return ok("saved");
+        return redirect("/itemsearch");
     }
 
 }

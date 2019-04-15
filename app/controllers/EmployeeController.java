@@ -104,7 +104,7 @@ public class EmployeeController extends BaseController
             picture = null;
         }
 
-        return ok("saved");
+        return redirect("/employeesearch");
     }
 
     public Result getEmployeeAdd()
@@ -134,7 +134,7 @@ public class EmployeeController extends BaseController
 
         db.em().persist(employee);
 
-        return ok("saved");
+        return redirect("/employeesearch");
     }
 
     @Transactional(readOnly = true)

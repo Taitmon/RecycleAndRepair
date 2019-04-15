@@ -26,9 +26,12 @@ public class WorkOrderDetail
     private LocalDateTime dateTime;
     private String  customerName;
     private String  employeeName;
+    private String deviceIMEI;
+
+
     private BigDecimal saleTotal;
 
-    public WorkOrderDetail(int workOrderId, String employeeFirstName, String employeeLastName, int deviceId, String modelName, String customerFirstName, String customerLastName, String customerPhoneNumber, String customerEmail, LocalDateTime dateTime)
+    public WorkOrderDetail(int workOrderId, String employeeFirstName, String employeeLastName, int deviceId, String modelName, String customerFirstName, String customerLastName, String customerPhoneNumber, String customerEmail, LocalDateTime dateTime, String deviceIMEI)
     {
         this.workOrderId = workOrderId;
         this.employeeFirstName = employeeFirstName;
@@ -40,6 +43,7 @@ public class WorkOrderDetail
         this.customerPhoneNumber = customerPhoneNumber;
         this.customerEmail = customerEmail;
         this.dateTime = dateTime;
+        this.deviceIMEI = deviceIMEI;
     }
 
     public int getWorkOrderId()
@@ -108,5 +112,10 @@ public class WorkOrderDetail
     {
 
         return saleTotal;
+    }
+
+    public String getDeviceIMEI()
+    {
+        return deviceIMEI;
     }
 }

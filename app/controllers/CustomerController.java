@@ -80,7 +80,7 @@ public Result getCustomer(int customerId)
         item.setEmail(email);
         db.em().persist(item);
 
-        return ok("saved");
+        return redirect("/customer/" + customerId);
     }
 
     @Transactional(readOnly=true)
@@ -185,7 +185,8 @@ Logger.debug(sortColumn);
 
         db.em().persist(customer);
 
-        return ok("saved");
+        int customerId = customer.getCustomerId();
+        return  redirect("/customersearch");
     }
 
 

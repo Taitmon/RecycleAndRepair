@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 import static play.mvc.Results.ok;
 
-public class HomeController extends Controller
+public class HomeController extends BaseController
 {
     private FormFactory formFactory;
     private JPAApi db;

@@ -5,15 +5,50 @@
         <meta charset="UTF-8">
         <title>Items</title>
         <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/stylesheets/index.css">
+        <link rel="stylesheet" href="/assets/stylesheets/searchtables.css">
         <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
     </head>
-    <body class="bg-secondary">
+    <body class="bg-secondary"  background="\assets\images\recycleandrepairicon.png">
         ​
         <nav class="navbar navbar-expand-lg text-light bg-dark mb-4">
-            <a class="navbar-brand text-white" href="/home">Home</a>
+            <a class="navbar-brand text-white" href="/home" >Home</a>
             <!-- Collapsible content -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                ​
+            <div class="collapse navbar-collapse" id="Employees">
+                <form method="get" action="/employeesearch">
+                    <a href="/employeesearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Employees">Employees
+                        </button>
+                    </a>
+                </form>
+                <form method="get" action="/customersearch">
+                    <a href="/customersearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Customers
+                        </button>
+                    </a>
+                </form>
+                <form method="get" action="/devicesearch">
+                    <a href="/devicesearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Devices
+                        </button>
+                    </a>
+                </form>
+                <form method="get" action="/itemsearch">
+                    <a href="/itemrsearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Items</button>
+                    </a>
+                </form>
+                <form method="get" action="/workordersearch">
+                    <a href="/workordersearch">
+                        @helper.CSRF.formField
+                        <button class="btn btn-danger btn-rounded btn-sm my-0 ml-sm-2" value="Customers">Work Orders
+                        </button>
+                    </a>
+                </form>
                 <!-- Search form -->
                 <form class="form-inline ml-auto">
                     <div class="md-form my-0">
@@ -40,7 +75,9 @@
         ​
         <form></form>
         <div class="container">
-            <h1 class="text-light display-1 text-center">Customer List</h1>
+            <h1 class="text-light display-1 text-center">
+                <label class="badge badge-dark">Devices</label>
+            </h1>
 
             <table class="table table-hover table-dark table-striped table-bordered">
                 <tr>
@@ -87,7 +124,7 @@
                     <td>@device.getModelName</td>
 
                     <td class="text-center">
-                        <a href="/deviceedit/@device.getDeviceId" class="btn btn-outline-danger btn-block">Edit</a></td>
+                        <a href="/deviceedit/@device.getDeviceId" class="btn btn-outline-light btn-block">Edit</a></td>
                 </tr>
                 }
 

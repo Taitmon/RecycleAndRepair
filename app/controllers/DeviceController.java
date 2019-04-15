@@ -39,12 +39,12 @@ public class DeviceController extends BaseController
         query.setParameter("deviceId", deviceId);
         Device device = query.getSingleResult(); */
 
-        TypedQuery<DeviceDetail> query =
+        TypedQuery<DeviceDetail> deviceDetailQuery =
                 db.em().createQuery("SELECT NEW DeviceDetail(d.deviceId, d.IMEI, m.modelName) " +
                         "FROM Device d JOIN Model m ON d.modelId = m.modelId " +
                         "WHERE deviceId = :deviceId ", DeviceDetail.class);
-        query.setParameter("deviceId", deviceId);
-        DeviceDetail device = query.getSingleResult();
+        deviceDetailQuery.setParameter("deviceId", deviceId);
+        DeviceDetail device = deviceDetailQuery.getSingleResult();
 
         return ok(views.html.device.render(device));
     }
@@ -139,8 +139,7 @@ public class DeviceController extends BaseController
         String IMEI = form.get("IMEI");
         String modelName = form.get("modelName");
 
-
-        return ok("saved");
+        return redirect("/devicesearch");
     }
 
     @Transactional

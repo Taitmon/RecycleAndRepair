@@ -1,6 +1,6 @@
 package controllers;
 
-import com.sun.xml.internal.bind.v2.TODO;
+
 import models.*;
 import play.Logger;
 import play.data.DynamicForm;
@@ -13,11 +13,12 @@ import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static play.mvc.Results.ok;
 
-public class WorkOrderController
+public class WorkOrderController extends BaseController
 {
 
     private FormFactory formFactory;
@@ -35,12 +36,12 @@ public class WorkOrderController
     {
         TypedQuery<WorkOrderDetail> query =
                 db.em().createQuery("SELECT NEW WorkOrderDetail( wo.workOrderId, e.firstName, e.lastName, d.deviceId, " +
-                        "m.modelName, c.firstName, c.lastName, c.phoneNumber, c.email, wo.dateTime) " +
+                        "m.modelName, c.firstName, c.lastName, c.phoneNumber, c.email, wo.dateTime, d.IMEI) " +
                         "FROM WorkOrder wo " +
-                        "JOIN Employee e ON wo.employeeId = e.employeeId  " +
-                        "JOIN Device d ON wo.deviceId = d.deviceId " +
-                        "JOIN Model m ON d.deviceId = m.modelId " +
-                        "JOIN Customer c ON wo.customerId = c.customerId " +
+                        "LEFT OUTER JOIN Employee e ON wo.employeeId = e.employeeId  " +
+                        "LEFT OUTER JOIN Device d ON wo.deviceId = d.deviceId " +
+                        "LEFT OUTER JOIN Model m ON d.modelId = m.modelId " +
+                        "LEFT OUTER JOIN Customer c ON wo.customerId = c.customerId " +
                         "WHERE workOrderId = :workOrderId ", WorkOrderDetail.class);
         query.setParameter("workOrderId", workOrderId);
         WorkOrderDetail workOrderDetail = query.getSingleResult();
@@ -90,11 +91,11 @@ public class WorkOrderController
 
         TypedQuery<WorkOrderDetail> query =
                 db.em().createQuery("SELECT NEW WorkOrderDetail( wo.workOrderId, e.firstName, e.lastName, d.deviceId, " +
-                        "m.modelName, c.firstName, c.lastName, c.phoneNumber, c.email, wo.dateTime) " +
+                        "m.modelName, c.firstName, c.lastName, c.phoneNumber, c.email, wo.dateTime, d.IMEI) " +
                         "FROM WorkOrder wo " +
                         "JOIN Employee e ON wo.employeeId = e.employeeId  " +
                         "JOIN Device d ON wo.deviceId = d.deviceId " +
-                        "JOIN Model m ON d.deviceId = m.modelId " +
+                        "JOIN Model m ON d.modelId = m.modelId " +
                         "JOIN Customer c ON wo.customerId = c.customerId " +
                         "WHERE workOrderId = :workOrderId ", WorkOrderDetail.class);
         query.setParameter("workOrderId", workOrderId);
@@ -108,7 +109,7 @@ public class WorkOrderController
                         "JOIN WorkOrderItems woi ON wo.workOrderId = woi.workOrderId " +
                         "JOIN Employee e ON wo.employeeId = e.employeeId " +
                         "JOIN Device d ON wo.deviceId = d.deviceId " +
-                        "JOIN Model m ON d.deviceId = m.modelId " +
+                        "JOIN Model m ON d.modelId = m.modelId " +
                         "JOIN Customer c ON wo.customerId = c.customerId " +
                         "JOIN Item i ON woi.itemId = i.itemId " +
                         "WHERE wo.workOrderId = :workOrderId ", WorkOrderItemsDetail.class);
@@ -145,7 +146,7 @@ public class WorkOrderController
 
         TypedQuery<WorkOrderDetail> query =
                 db.em().createQuery("SELECT NEW WorkOrderDetail( wo.workOrderId, e.firstName, e.lastName, d.deviceId, " +
-                        "m.modelName, c.firstName, c.lastName, c.phoneNumber, c.email, wo.dateTime) " +
+                        "m.modelName, c.firstName, c.lastName, c.phoneNumber, c.email, wo.dateTime, d.IMEI) " +
                         "FROM WorkOrder wo " +
                         "JOIN Employee e ON wo.employeeId = e.employeeId  " +
                         "JOIN Device d ON wo.deviceId = d.deviceId " +
@@ -223,6 +224,12 @@ public class WorkOrderController
             case "customerPhoneNumberDESC":
                 sortOrder = "c.phoneNumber DESC, wo.dateTime";
                 break;
+            case "IMEIASC":
+                sortOrder = "d.IMEI ASC, e.firstName";
+                break;
+            case "IMEIDESC":
+                sortOrder = "d.IMEI DESC, e.firstName";
+                break;
             case "employeeNameASC":
                 sortOrder = "e.lastName ASC, e.firstName";
                 break;
@@ -247,13 +254,13 @@ public class WorkOrderController
 
         TypedQuery<WorkOrderDetail> query =
                 db.em().createQuery("SELECT NEW WorkOrderDetail( wo.workOrderId, e.firstName, e.lastName, d.deviceId, " +
-                        "m.modelName, c.firstName, c.lastName, c.phoneNumber, c.email, wo.dateTime) " +
+                        "m.modelName, c.firstName, c.lastName, c.phoneNumber, c.email, wo.dateTime, d.IMEI) " +
                         "FROM WorkOrder wo " +
                         "JOIN Employee e ON wo.employeeId = e.employeeId  " +
                         "JOIN Device d ON wo.deviceId = d.deviceId " +
-                        "JOIN Model m ON d.deviceId = m.modelId " +
+                        "JOIN Model m ON d.modelId = m.modelId " +
                         "JOIN Customer c ON wo.customerId = c.customerId " +
-                        "WHERE c.firstName LIKE :name OR wo.workOrderId LIKE :name OR c.phoneNumber LIKE :name OR  " +
+                        "WHERE c.firstName LIKE :name OR wo.workOrderId LIKE :name OR c.phoneNumber LIKE :name OR  d.IMEI like :name OR " +
                         "wo.dateTime LIKE :name " +
                         "ORDER BY " + sortOrder, WorkOrderDetail.class);
         query.setParameter("name", name);
@@ -263,10 +270,41 @@ public class WorkOrderController
     }
 //TODO add a create WO post and get
     @Transactional
-    public Result getWorkOrderCreate()
+    public Result getCreateWorkOrder()
     {
-        return ok(views.html.createworkorder.render());
+        DynamicForm form = formFactory.form().bindFromRequest();
+        int selectCustomerId = Integer.parseInt(form.get("selectedCustomerId"));
+        int selectDeviceId = Integer.parseInt(form.get("selectedDeviceId"));
+        return ok(views.html.createworkorder.render(selectCustomerId, selectDeviceId));
     }
+
+    @Transactional
+    public Result postCreateWorkOrder()
+    {
+        WorkOrder workOrder = new WorkOrder();
+
+        DynamicForm form = formFactory.form().bindFromRequest();
+
+
+        int customerId = Integer.parseInt(form.get("selectedCustomerId"));
+        int deviceId = Integer.parseInt(form.get("selectedDeviceId"));
+
+
+
+
+        workOrder.setEmployeeId(getLoggedInEmployeeId());
+        workOrder.setCustomerId(customerId);
+        workOrder.setDeviceId(deviceId);
+        workOrder.setDateTime(LocalDateTime.now());
+
+        db.em().persist(workOrder);
+
+        int createdWorkOrder = workOrder.getWorkOrderId();
+
+        return redirect("/workorder/" + workOrder.getWorkOrderId());
+
+    }
+
 
     @Transactional
     public Result getWorkOrderAdd()
@@ -346,7 +384,6 @@ public class WorkOrderController
         query.setParameter("name", name);
         List<CustomerDetail> customersearch = query.getResultList();
 
-
         return ok(views.html.existingcustomer.render(customersearch));
     }
 
@@ -376,23 +413,30 @@ public class WorkOrderController
 
         db.em().persist(customer);
 
-        return ok(views.html.createworkorder.render());
+        int selectedCustomerId = customer.getCustomerId();
+        Logger.debug("Number*****  "+ customer.getCustomerId());
+        return ok(views.html.addorexistingdevice.render(selectedCustomerId));
     }
 
+    @Transactional
     public Result getAddOrExistingDevice()
     {
-        return ok(views.html.addorexistingdevice.render());
+        DynamicForm form = formFactory.form().bindFromRequest();
+        int selectCustomerId = Integer.parseInt(form.get("selectedCustomerId"));
+        return ok(views.html.addorexistingdevice.render(selectCustomerId));
     }
 
     @Transactional
     public Result getDeviceAddToWorkOrder()
     {
-
+        DynamicForm form = formFactory.form().bindFromRequest();
 
         TypedQuery<Model> modelQuery = db.em().createQuery("SELECT c FROM Model c ORDER BY modelName", Model.class);
         List<Model> models = modelQuery.getResultList();
 
-        return ok(views.html.deviceaddtoworkorder.render(models));
+        int selectCustomerId = Integer.parseInt(form.get("selectedCustomerId"));
+
+        return ok(views.html.deviceaddtoworkorder.render(models, selectCustomerId));
     }
 
     @Transactional
@@ -411,7 +455,14 @@ public class WorkOrderController
         device.setModelId(modelId);
         device.setIMEI(IMEI);
         db.em().persist(device);
-        return ok(views.html.createworkorder.render());
+
+        TypedQuery<Model> modelQuery = db.em().createQuery("SELECT c FROM Model c ORDER BY modelName", Model.class);
+        List<Model> models = modelQuery.getResultList();
+
+        int selectedCustomerId = Integer.parseInt(form.get("selectedCustomerId"));
+        int selectedDeviceId = device.getDeviceId();
+
+        return ok(views.html.createworkorder.render(selectedCustomerId, selectedDeviceId));
     }
 
     @Transactional
@@ -476,7 +527,10 @@ public class WorkOrderController
         List<DeviceDetail> devicesearch = query.getResultList();
 
 
-        return ok(views.html.existingdevice.render(devicesearch));
+
+        int selectCustomerId = Integer.parseInt(form.get("selectedCustomerId"));
+
+        return ok(views.html.existingdevice.render(devicesearch, selectCustomerId));
     }
 
 }

@@ -265,10 +265,45 @@ VALUES  (1, 1, 1, 1, 0.10),
         (23, 39, 1, 12, 0),
         (24, 48, 1, 12, 0)
 
+INSERT INTO Customer
+(FirstName, LastName, PhoneNumber, Email)
+VALUES ('Rena','Rogers','766-811-6951','iwi@vuges.ge'),
+ ('Alberta','Bennett','262-405-3321','ko@osejihe.cn'),
+ ('Cory','Graves','886-892-4159','riip@mukfangu.ua'),
+ ('Katharine','Walker','906-759-1100','sejsu@urupihu.pf'),
+ ('Birdie','Nichols','672-828-2053','owubu@he.ve'),
+ ('Bobby','Mann','451-471-3173','kif@webimni.dj'),
+ ('Bernard','Alvarez','731-230-4128','wagsomo@sad.re'),
+ ('Francisco','Butler','915-607-1458','re@kihmadi.is'),
+ ('Jacob','Ingram','685-715-4008','nekvog@wifacer.by'),
+ ('Jesus','Garrett','256-907-9777','zugu@naz.sg'),
+ ('Jim','Munoz','637-864-8511','avu@pogerfi.su'),
+ ('Alejandro','Terry','804-620-2373','wubij@jejizped.cg'),
+ ('Bess','Hines','953-869-1932','rotcukoti@kar.sx'),
+ ('Fanny','Burgess','576-548-7717','saihoole@veeti.nf'),
+ ('Bobby','Summers','846-883-5915','apula@duhga.mo'),
+ ('Ralph','Rogers','861-541-5920','hober@zuzit.ly'),
+ ('Martha','Brock','237-794-2019','umu@bakveer.dm'),
+ ('Inez','Alvarado','502-670-2372','set@fafar.za'),
+ ('Christian','Owen','566-869-5866','cacerto@tew.sa'),
+ ('Cora','Mack','900-796-8316','zow@bec.ls'),
+ ('Rena','Diaz','530-739-8081','izzil@fem.mt'),
+ ('Victoria','Washington','349-528-8202','uj@pofjazboh.ru'),
+ ('Jonathan','Ortiz','347-858-7920','cejaibi@zeh.mu'),
+ ('Myrtle','Ramirez','241-994-1486','artose@so.sg'),
+ ('Sam','Bowers','635-839-5928','wuskugun@tize.ax'),
+ ('Jeremiah','Wade','844-697-9308','ikalij@zotatked.mp'),
+ ('Jane','Brown','431-601-6175','emo@desuroj.pa'),
+ ('Max','Christensen','804-604-4092','acilit@ruwuwap.lv'),
+ ('Sylvia','Little','810-428-8218','gifgik@zil.bs'),
+ ('Violet','Banks','514-420-4172','ne@zu.eu'),
+ ('Clarence','Woods','702-322-6560','luh@limuw.ca'),
+ ('Brent','McGuire','335-735-8209','vu@suhvuwlo.lr'),
+ ('Harriett','Ferguson','869-622-9776','zi@cas.sn'),
+ ('Mathilda','Guerrero','563-650-4805','pipalbic@jisama.fm'),
+ ('Ian','George','368-672-2210','onafacen@ri.mz'),
+ ('Lester','Schwartz','905-816-8209','dozgoaco@jabvokor.eg'),
+ ('Louis','Delgado','840-577-2073','nouvauf@buho.sl'),
+ ('Edgar','Dunn','553-607-9185','pib@hugiksa.qa')
 
-
-
-
-
-
-
+''
