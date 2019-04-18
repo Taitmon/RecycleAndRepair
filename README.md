@@ -55,27 +55,27 @@ I used the following resources to build storefully:
 
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Home%20Page.PNG)
 
-##### This is the Employees Page, here you can create new , search and edit .
+##### This is the Employees Page, here you can create, sort, search and edit employees.
 
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Emplyees%20Page.PNG)
 
-##### This is the Device Page, here you can create, search and edit Devices.
+##### This is the Device Page, here you can create, sort, search and edit Devices.
 
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Device%20Page.PNG)
 
-##### This is the Customer Page, here you can create, search and edit Customers.
+##### This is the Customer Page, here you can create, sort, search and edit Customers.
 
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Customer%20Page.PNG)
 
-##### This is the Items Page, here you can create, search and edit Items.
+##### This is the Items Page, here you can create, search and edit Items. Items that you sell will have a unit cost. That unit cost can fluctuate with the market. So being able to edit the items  retail cost is very important. 
 
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Items%20Page.PNG)
 
-##### This is the Work Orders Search Page. Here you can search and view work orders.
+##### This is the Work Orders Search Page. Here you can sort, search and view work orders.
 
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Work%20Orders%20Page.PNG)
 
-##### This is a specific work order page. Here you can view, add or delete items with a total cost.
+##### This is a specific work order page. Here you can view, add or delete items with a total cost. You can also see who this device belongs to with the customers name attached to the Work Order. There is also a time stamp that shows when the work order was created. When a employee is logged in and they click create work order it automatically assign the logged in employee to that work order.
 
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Work%20Order%20Page.PNG)
 
