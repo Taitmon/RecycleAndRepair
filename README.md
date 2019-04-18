@@ -51,15 +51,32 @@ I used the following resources to build storefully:
 - Star Schema for Data Base Design
 
 ## Pictures Of Application
-
-
+##### This is the Home Page, here you can navigate to any part of the application
 
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Home%20Page.PNG)
+
+##### This is the Employees Page, here you can create new , search and edit .
+
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Emplyees%20Page.PNG)
+
+##### This is the Device Page, here you can create, search and edit Devices.
+
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Device%20Page.PNG)
+
+##### This is the Customer Page, here you can create, search and edit Customers.
+
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Customer%20Page.PNG)
+
+##### This is the Items Page, here you can create, search and edit Items.
+
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Items%20Page.PNG)
+
+##### This is the Work Orders Search Page. Here you can search and view work orders.
+
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Work%20Orders%20Page.PNG)
+
+##### This is a specific work order page. Here you can view, add or delete items with a total cost.
+
 ![alt text](https://raw.githubusercontent.com/Taitmon/RecycleAndRepair/master/public/images/Work%20Order%20Page.PNG)
 
 
