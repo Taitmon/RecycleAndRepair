@@ -6,6 +6,9 @@ This application was designed to solve two issues that I constanlty ran into at 
 Run this using [sbt](http://www.scala-sbt.org/).  
 
 ```
+open CMD, then type
+cd (dir name of RecycleAndRepair goes here)
+then type
 sbt run
 ```
 
